@@ -1,4 +1,4 @@
-package com.shermanrex.interview_movierex.ui.theme
+package com.shermanrex.movierex.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

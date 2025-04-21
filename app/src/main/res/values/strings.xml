@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">Interview-MovieRex</string>
+    <string name="app_name">MovieRex</string>
+    <string name="Home">Home</string>
+    <string name="Search">Search</string>
 </resources>

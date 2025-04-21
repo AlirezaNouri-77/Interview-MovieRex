@@ -13,9 +13,9 @@
         android:theme="@style/Theme.InterviewMovieRex"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name="com.shermanrex.movierex.MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
+            android:label="@string/Home"
             android:theme="@style/Theme.InterviewMovieRex">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

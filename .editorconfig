@@ -1,0 +1,4 @@
+
+
+[*.{kt,kts}]
+ktlint_standard_function-naming = disable

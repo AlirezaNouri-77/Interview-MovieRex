@@ -1,38 +1,57 @@
 package com.shermanrex.movierex.presention
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.paint
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavDestination.Companion.hasRoute
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.shermanrex.movierex.data.model.Detail
+import com.shermanrex.movierex.data.model.Home
+import com.shermanrex.movierex.presention.component.MovieRexBottomBar
 import com.shermanrex.movierex.ui.theme.InterviewMovieRexTheme
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(modifier: Modifier = Modifier) {
 
     var navHostController = rememberNavController()
     var currentDestinationId = navHostController.currentDestination?.id ?: 0
+    val currentBackStackEntry by navHostController.currentBackStackEntryAsState()
+
+    val shouldHideBottomBar = remember(currentBackStackEntry) {
+        (navHostController.currentBackStackEntry?.destination?.hasRoute(Detail::class)
+            ?: Home) == false
+    }
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
         bottomBar = {
-            MovieRexBottomBar(
-                onClick = {
-                    navHostController.navigate(it) {
-                        popUpTo(currentDestinationId) {
-                            inclusive = true
-                            saveState = true
+            AnimatedVisibility(shouldHideBottomBar) {
+                MovieRexBottomBar(
+                    onClick = {
+                        navHostController.navigate(it) {
+                            popUpTo(currentDestinationId) {
+                                inclusive = true
+                                saveState = true
+                            }
+                            restoreState = true
+                            launchSingleTop = true
                         }
-                        restoreState = true
-                        launchSingleTop = true
                     }
-                }
-            )
-        }
+                )
+            }
+        },
+        contentWindowInsets = WindowInsets(top = 0)
     ) { scaffoldPadding ->
         Box(modifier = Modifier.padding(scaffoldPadding)) {
             NavigationGraph(
@@ -41,12 +60,4 @@ fun MainScreen(modifier: Modifier = Modifier) {
         }
     }
 
-}
-
-@Preview
-@Composable
-private fun PreviewMainScreen() {
-    InterviewMovieRexTheme {
-        MainScreen()
-    }
 }

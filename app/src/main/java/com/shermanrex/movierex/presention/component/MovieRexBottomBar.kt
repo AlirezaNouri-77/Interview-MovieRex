@@ -1,4 +1,4 @@
-package com.shermanrex.movierex.presention
+package com.shermanrex.movierex.presention.component
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.icons.Icons
@@ -19,12 +19,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import com.shermanrex.interview_movierex.R
-import com.shermanrex.movierex.model.NavigationBarItemModel
+import com.shermanrex.movierex.data.model.Home
+import com.shermanrex.movierex.data.model.NavigationBarItemModel
+import com.shermanrex.movierex.data.model.NavigationRoutes
+import com.shermanrex.movierex.data.model.Search
 
 @Composable
 fun MovieRexBottomBar(
     modifier: Modifier = Modifier,
-    onClick: (NavigationRoute) -> Unit,
+    onClick: (NavigationRoutes) -> Unit,
 ) {
 
     var currentNavigationIndex by rememberSaveable {

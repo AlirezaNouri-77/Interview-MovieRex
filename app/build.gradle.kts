@@ -66,13 +66,21 @@ dependencies {
 
     implementation(libs.gson)
     implementation(libs.retrofit)
+    implementation(libs.okhttp3.interceptor)
 
     implementation(libs.kotlinx.serialization)
 
     implementation(libs.google.hilt)
+    implementation(libs.google.hilt.navigationCompose)
     ksp(libs.google.hilt.compiler)
 
     implementation(libs.androidx.compose.navigation)
+
+    implementation(libs.coil)
+    implementation(libs.coil.network)
+
+    implementation(libs.androidx.paging.compose)
+    implementation(libs.androidx.paging.runtime)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

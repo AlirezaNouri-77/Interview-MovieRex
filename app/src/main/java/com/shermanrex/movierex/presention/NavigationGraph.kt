@@ -6,19 +6,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.toRoute
+import com.shermanrex.movierex.data.model.Detail
+import com.shermanrex.movierex.data.model.Home
+import com.shermanrex.movierex.data.model.Search
+import com.shermanrex.movierex.presention.detail.DetailScreen
+import com.shermanrex.movierex.presention.home.HomeScreen
+import com.shermanrex.movierex.presention.search.SearchScreen
 import kotlinx.serialization.Serializable
-
-sealed interface NavigationRoute
-
-@Serializable
-data object Home : NavigationRoute
-
-@Serializable
-data object Search : NavigationRoute
 
 @Composable
 fun NavigationGraph(
@@ -33,11 +31,29 @@ fun NavigationGraph(
     ) {
 
         composable<Home> {
-            Box(Modifier.fillMaxSize().background(Color.Red))
+            HomeScreen(
+                navToDetail = { movieID ->
+                    navHostController.navigate(Detail(movieID))
+                },
+            )
         }
 
         composable<Search> {
-            Box(Modifier.fillMaxSize().background(Color.Green))
+            SearchScreen(
+                navigationToDetailScreen = { movieID ->
+                    navHostController.navigate(Detail(movieID))
+                },
+            )
+        }
+
+        composable<Detail> { navBackStackEntry ->
+            val movieID = navBackStackEntry.toRoute<Detail>().movieID
+            DetailScreen(
+                movieID = movieID,
+                onBackClick = {
+                    navHostController.popBackStack()
+                },
+            )
         }
 
     }

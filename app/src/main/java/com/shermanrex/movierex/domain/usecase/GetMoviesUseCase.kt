@@ -1,14 +1,14 @@
 package com.shermanrex.movierex.domain.usecase
 
 import com.shermanrex.movierex.data.di.DispatcherIO
+import com.shermanrex.movierex.data.util.toMovieData
+import com.shermanrex.movierex.data.util.toMovieEntity
 import com.shermanrex.movierex.domain.model.MovieModel
 import com.shermanrex.movierex.domain.model.NetworkError
 import com.shermanrex.movierex.domain.model.Result
-import com.shermanrex.movierex.domain.repository.RemoteMovieRepositoryImpl
-import com.shermanrex.movierex.data.util.toMovieData
-import com.shermanrex.movierex.data.util.toMovieEntity
-import com.shermanrex.movierex.domain.util.NetworkConnectivityImpl
 import com.shermanrex.movierex.domain.repository.LocalMovieRepositoryImpl
+import com.shermanrex.movierex.domain.repository.RemoteMovieRepositoryImpl
+import com.shermanrex.movierex.domain.util.NetworkConnectivityImpl
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first

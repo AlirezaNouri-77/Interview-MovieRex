@@ -5,7 +5,7 @@ import com.shermanrex.movierex.domain.model.MovieUiState
 import com.shermanrex.movierex.domain.model.NetworkError
 import com.shermanrex.movierex.domain.model.Result
 import com.shermanrex.movierex.domain.usecase.GetMoviesUseCase
-import com.shermanrex.movierex.presention.home.HomeViewModel
+import com.shermanrex.movierex.presention.feature.home.HomeViewModel
 import com.shermanrex.movierex.repository.LocalMovieRepositoryFake
 import com.shermanrex.movierex.repository.RemoteMovieRepositoryFake
 import com.shermanrex.movierex.util.MovieEntityDummy

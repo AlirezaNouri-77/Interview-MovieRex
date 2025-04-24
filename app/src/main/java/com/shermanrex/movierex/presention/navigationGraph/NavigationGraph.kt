@@ -6,9 +6,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
-import com.shermanrex.movierex.presention.detail.DetailScreen
-import com.shermanrex.movierex.presention.home.HomeScreen
-import com.shermanrex.movierex.presention.search.SearchScreen
+import com.shermanrex.movierex.presention.feature.detail.DetailScreen
+import com.shermanrex.movierex.presention.feature.home.HomeScreen
+import com.shermanrex.movierex.presention.feature.search.SearchScreen
 
 @Composable
 fun NavigationGraph(

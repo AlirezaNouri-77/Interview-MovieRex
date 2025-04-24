@@ -1,4 +1,4 @@
-package com.shermanrex.movierex.presention.search.component
+package com.shermanrex.movierex.presention.feature.search.component
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement

@@ -1,4 +1,4 @@
-package com.shermanrex.movierex.presention.search
+package com.shermanrex.movierex.presention.feature.search
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

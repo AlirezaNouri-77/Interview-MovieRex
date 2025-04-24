@@ -1,6 +1,5 @@
-package com.shermanrex.movierex.presention.detail.component
+package com.shermanrex.movierex.presention.feature.detail.component
 
-import android.content.res.Configuration
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable

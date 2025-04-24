@@ -20,8 +20,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.shermanrex.interview_movierex.R
-import com.shermanrex.movierex.presention.navigationGraph.Home
 import com.shermanrex.movierex.domain.model.NavigationBarItemModel
+import com.shermanrex.movierex.presention.navigationGraph.Home
 import com.shermanrex.movierex.presention.navigationGraph.NavigationRoutes
 import com.shermanrex.movierex.presention.navigationGraph.Search
 import com.shermanrex.movierex.ui.theme.InterviewMovieRexTheme

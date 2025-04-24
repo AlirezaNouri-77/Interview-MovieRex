@@ -1,6 +1,5 @@
 package com.shermanrex.movierex.presention.component
 
-import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize

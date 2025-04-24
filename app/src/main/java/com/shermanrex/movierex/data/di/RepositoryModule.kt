@@ -3,9 +3,9 @@ package com.shermanrex.movierex.data.di
 import com.shermanrex.movierex.data.database.dao.MovieDao
 import com.shermanrex.movierex.data.repository.local.LocalMovieRepository
 import com.shermanrex.movierex.data.repository.remote.movies.RemoteMovieRepository
-import com.shermanrex.movierex.domain.repository.RemoteMovieRepositoryImpl
 import com.shermanrex.movierex.data.repository.remote.movies.RetrofitApi
 import com.shermanrex.movierex.domain.repository.LocalMovieRepositoryImpl
+import com.shermanrex.movierex.domain.repository.RemoteMovieRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

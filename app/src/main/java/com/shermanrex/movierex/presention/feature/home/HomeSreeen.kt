@@ -1,6 +1,5 @@
-package com.shermanrex.movierex.presention.home
+package com.shermanrex.movierex.presention.feature.home
 
-import android.content.res.Configuration
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
@@ -21,9 +20,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.shermanrex.interview_movierex.R
+import com.shermanrex.movierex.data.util.toReadableMessage
 import com.shermanrex.movierex.domain.model.MovieData
 import com.shermanrex.movierex.domain.model.MovieUiState
-import com.shermanrex.movierex.data.util.toReadableMessage
 import com.shermanrex.movierex.presention.component.FailurePage
 import com.shermanrex.movierex.presention.component.MovieListItem
 import com.shermanrex.movierex.presention.component.MovieTopAppBar
@@ -115,7 +114,6 @@ private fun Home(
 }
 
 @Preview(showBackground = true)
-@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun Preview() {
     var dummyList = buildList {

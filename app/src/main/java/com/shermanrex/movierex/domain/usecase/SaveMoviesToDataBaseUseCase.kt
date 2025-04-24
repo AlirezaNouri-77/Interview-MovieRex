@@ -1,8 +1,8 @@
 package com.shermanrex.movierex.domain.usecase
 
 import com.shermanrex.movierex.data.di.DispatcherIO
-import com.shermanrex.movierex.domain.model.MovieData
 import com.shermanrex.movierex.data.util.toMovieEntity
+import com.shermanrex.movierex.domain.model.MovieData
 import com.shermanrex.movierex.domain.repository.LocalMovieRepositoryImpl
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext

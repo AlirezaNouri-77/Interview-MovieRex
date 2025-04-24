@@ -1,11 +1,11 @@
 package com.shermanrex.movierex.data.repository.remote.movies
 
 import com.shermanrex.movierex.data.di.MovieRetrofit
-import com.shermanrex.movierex.domain.model.NetworkError
+import com.shermanrex.movierex.data.util.safeCall
 import com.shermanrex.movierex.domain.model.MovieDetailModel
 import com.shermanrex.movierex.domain.model.MovieModel
+import com.shermanrex.movierex.domain.model.NetworkError
 import com.shermanrex.movierex.domain.model.Result
-import com.shermanrex.movierex.data.util.safeCall
 import com.shermanrex.movierex.domain.repository.RemoteMovieRepositoryImpl
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package com.shermanrex.movierex.presention.detail
+package com.shermanrex.movierex.presention.feature.detail
 
 import android.content.res.Configuration
 import androidx.compose.animation.Crossfade
@@ -36,11 +36,11 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.shermanrex.interview_movierex.R
-import com.shermanrex.movierex.domain.model.MovieUiState
 import com.shermanrex.movierex.data.util.toReadableMessage
+import com.shermanrex.movierex.domain.model.MovieUiState
 import com.shermanrex.movierex.presention.component.FailurePage
 import com.shermanrex.movierex.presention.component.MoviePoster
-import com.shermanrex.movierex.presention.detail.component.InfoDetailText
+import com.shermanrex.movierex.presention.feature.detail.component.InfoDetailText
 import com.shermanrex.movierex.ui.theme.InterviewMovieRexTheme
 
 @Composable

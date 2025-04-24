@@ -16,9 +16,9 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.shermanrex.movierex.presention.component.MovieRexBottomBar
 import com.shermanrex.movierex.presention.navigationGraph.Detail
 import com.shermanrex.movierex.presention.navigationGraph.Home
-import com.shermanrex.movierex.presention.component.MovieRexBottomBar
 import com.shermanrex.movierex.presention.navigationGraph.NavigationGraph
 
 @OptIn(ExperimentalMaterial3Api::class)

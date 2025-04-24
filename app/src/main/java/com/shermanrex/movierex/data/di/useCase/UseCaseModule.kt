@@ -1,14 +1,11 @@
 package com.shermanrex.movierex.data.di.useCase
 
 import com.shermanrex.movierex.data.di.DispatcherIO
-import com.shermanrex.movierex.data.repository.local.LocalMovieRepository
-import com.shermanrex.movierex.data.repository.remote.movies.RemoteMovieRepository
-import com.shermanrex.movierex.domain.repository.RemoteMovieRepositoryImpl
 import com.shermanrex.movierex.domain.repository.LocalMovieRepositoryImpl
+import com.shermanrex.movierex.domain.repository.RemoteMovieRepositoryImpl
 import com.shermanrex.movierex.domain.usecase.GetMovieByNameUseCase
 import com.shermanrex.movierex.domain.usecase.GetMovieDetailUseCase
 import com.shermanrex.movierex.domain.usecase.GetMoviesUseCase
-import com.shermanrex.movierex.domain.usecase.SaveMoviesToDataBaseUseCase
 import com.shermanrex.movierex.domain.util.NetworkConnectivityImpl
 import dagger.Module
 import dagger.Provides

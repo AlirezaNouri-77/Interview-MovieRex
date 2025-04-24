@@ -1,4 +1,4 @@
-package com.shermanrex.movierex.presention.detail
+package com.shermanrex.movierex.presention.feature.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

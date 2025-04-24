@@ -25,14 +25,10 @@ data class MovieData(
 
 @Keep
 data class Metadata(
-    @SerializedName("current_page")
-    val currentPage: String,
-    @SerializedName("page_count")
-    val pageCount: Int,
-    @SerializedName("per_page")
-    val perPage: Int,
-    @SerializedName("total_count")
-    val totalCount: Int
+    @SerializedName("current_page") val currentPage: String,
+    @SerializedName("page_count") val pageCount: Int,
+    @SerializedName("per_page") val perPage: Int,
+    @SerializedName("total_count") val totalCount: Int
 )
 
 

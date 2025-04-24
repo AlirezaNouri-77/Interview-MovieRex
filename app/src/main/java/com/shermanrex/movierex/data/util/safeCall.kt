@@ -1,12 +1,12 @@
 package com.shermanrex.movierex.data.util
 
+import com.shermanrex.movierex.domain.model.NetworkError
+import com.shermanrex.movierex.domain.model.Result
 import kotlinx.serialization.SerializationException
 import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
 import java.net.SocketTimeoutException
-import com.shermanrex.movierex.domain.model.NetworkError
-import com.shermanrex.movierex.domain.model.Result
 
 inline fun <reified T> safeCall(action: () -> Response<T>): Result<T, NetworkError> {
   return try {

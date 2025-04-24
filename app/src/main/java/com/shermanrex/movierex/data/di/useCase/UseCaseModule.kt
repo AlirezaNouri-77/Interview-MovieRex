@@ -1,11 +1,15 @@
 package com.shermanrex.movierex.data.di.useCase
 
 import com.shermanrex.movierex.data.di.DispatcherIO
-import com.shermanrex.movierex.data.repository.remote.movies.MovieRepository
-import com.shermanrex.movierex.data.repository.remote.movies.MovieRepositoryImpl
-import com.shermanrex.movierex.domain.GetMovieByNameUseCase
-import com.shermanrex.movierex.domain.GetMovieDetailUseCase
-import com.shermanrex.movierex.domain.GetMoviesUseCase
+import com.shermanrex.movierex.data.repository.local.LocalMovieRepository
+import com.shermanrex.movierex.data.repository.remote.movies.RemoteMovieRepository
+import com.shermanrex.movierex.domain.repository.RemoteMovieRepositoryImpl
+import com.shermanrex.movierex.domain.repository.LocalMovieRepositoryImpl
+import com.shermanrex.movierex.domain.usecase.GetMovieByNameUseCase
+import com.shermanrex.movierex.domain.usecase.GetMovieDetailUseCase
+import com.shermanrex.movierex.domain.usecase.GetMoviesUseCase
+import com.shermanrex.movierex.domain.usecase.SaveMoviesToDataBaseUseCase
+import com.shermanrex.movierex.domain.util.NetworkConnectivityImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,11 +24,15 @@ object UseCaseModule {
     @Provides
     @Singleton
     fun provideGetMovieUseCase(
-        movieRepositoryImpl: MovieRepository,
+        movieRepositoryImpl: RemoteMovieRepositoryImpl,
+        dataBaseRepository: LocalMovieRepositoryImpl,
+        networkConnectivity: NetworkConnectivityImpl,
         @DispatcherIO dispatcher: CoroutineDispatcher,
     ): GetMoviesUseCase {
         return GetMoviesUseCase(
-            movieRepository = movieRepositoryImpl,
+            remoteMovieRepository = movieRepositoryImpl,
+            localMovieRepository = dataBaseRepository,
+            networkConnectivity = networkConnectivity,
             dispatcherIO = dispatcher,
         )
     }
@@ -32,11 +40,11 @@ object UseCaseModule {
     @Provides
     @Singleton
     fun provideGetMovieDetailUseCase(
-        movieRepositoryImpl: MovieRepository,
+        movieRepositoryImpl: RemoteMovieRepositoryImpl,
         @DispatcherIO dispatcher: CoroutineDispatcher,
     ): GetMovieDetailUseCase {
         return GetMovieDetailUseCase(
-            movieRepository = movieRepositoryImpl,
+            remoteMovieRepository = movieRepositoryImpl,
             dispatcherIO = dispatcher,
         )
     }
@@ -44,11 +52,11 @@ object UseCaseModule {
     @Provides
     @Singleton
     fun provideGetMovieByNameUseCase(
-        movieRepositoryImpl: MovieRepository,
+        movieRepositoryImpl: RemoteMovieRepositoryImpl,
         @DispatcherIO dispatcher: CoroutineDispatcher,
     ): GetMovieByNameUseCase {
         return GetMovieByNameUseCase(
-            movieRepository = movieRepositoryImpl,
+            remoteMovieRepository = movieRepositoryImpl,
             dispatcherIO = dispatcher,
         )
     }

@@ -2,16 +2,16 @@ package com.shermanrex.movierex.data.util
 
 import android.content.Context
 import com.shermanrex.interview_movierex.R
-import com.shermanrex.movierex.data.model.NetWorkError
+import com.shermanrex.movierex.domain.model.NetworkError
 
-fun NetWorkError.toReadableMessage(context: Context): String {
+fun NetworkError.toReadableMessage(context: Context): String {
     return when(this){
-        NetWorkError.TIME_OUT -> context.getString(R.string.time_out)
-        NetWorkError.INTERNET_CONNECTION -> context.getString(R.string.internet_connection)
-        NetWorkError.SERIALIZATION -> context.getString(R.string.unknown)
-        NetWorkError.UNKNOWN -> context.getString(R.string.unknown)
-        NetWorkError.SERVER_CONNECTION -> context.getString(R.string.server_connection)
-        NetWorkError.RESPONSE_NOT_SUCCESSFUL -> context.getString(R.string.unknown)
-        NetWorkError.NOT_FOUND_404 -> context.getString(R.string.not_found)
+        NetworkError.TIME_OUT -> context.getString(R.string.time_out)
+        NetworkError.INTERNET_CONNECTION -> context.getString(R.string.internet_connection)
+        NetworkError.SERIALIZATION -> context.getString(R.string.unknown)
+        NetworkError.UNKNOWN -> context.getString(R.string.unknown)
+        NetworkError.SERVER_CONNECTION -> context.getString(R.string.server_connection)
+        NetworkError.RESPONSE_NOT_SUCCESSFUL -> context.getString(R.string.unknown)
+        NetworkError.NOT_FOUND_404 -> context.getString(R.string.not_found)
     }
 }

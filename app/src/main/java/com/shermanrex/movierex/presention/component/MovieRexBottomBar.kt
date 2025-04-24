@@ -18,11 +18,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import com.shermanrex.interview_movierex.R
-import com.shermanrex.movierex.data.model.Home
-import com.shermanrex.movierex.data.model.NavigationBarItemModel
-import com.shermanrex.movierex.data.model.NavigationRoutes
-import com.shermanrex.movierex.data.model.Search
+import com.shermanrex.movierex.presention.navigationGraph.Home
+import com.shermanrex.movierex.domain.model.NavigationBarItemModel
+import com.shermanrex.movierex.presention.navigationGraph.NavigationRoutes
+import com.shermanrex.movierex.presention.navigationGraph.Search
+import com.shermanrex.movierex.ui.theme.InterviewMovieRexTheme
 
 @Composable
 fun MovieRexBottomBar(
@@ -77,5 +79,16 @@ fun MovieRexBottomBar(
         }
     }
 
+}
+
+@Preview(showBackground = true, uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES)
+@Preview(showBackground = true)
+@Composable
+private fun Preview() {
+    InterviewMovieRexTheme {
+        MovieRexBottomBar(
+            onClick = {},
+        )
+    }
 }
 

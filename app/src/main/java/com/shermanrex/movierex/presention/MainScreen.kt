@@ -1,6 +1,8 @@
 package com.shermanrex.movierex.presention
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,14 +13,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.shermanrex.movierex.data.model.Detail
-import com.shermanrex.movierex.data.model.Home
+import com.shermanrex.movierex.presention.navigationGraph.Detail
+import com.shermanrex.movierex.presention.navigationGraph.Home
 import com.shermanrex.movierex.presention.component.MovieRexBottomBar
-import com.shermanrex.movierex.ui.theme.InterviewMovieRexTheme
+import com.shermanrex.movierex.presention.navigationGraph.NavigationGraph
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -36,7 +37,11 @@ fun MainScreen(modifier: Modifier = Modifier) {
     Scaffold(
         modifier = modifier.fillMaxSize(),
         bottomBar = {
-            AnimatedVisibility(shouldHideBottomBar) {
+            AnimatedVisibility(
+                visible = shouldHideBottomBar,
+                exit = slideOutHorizontally { it },
+                enter = slideInVertically { it + it / 2 }
+            ) {
                 MovieRexBottomBar(
                     onClick = {
                         navHostController.navigate(it) {

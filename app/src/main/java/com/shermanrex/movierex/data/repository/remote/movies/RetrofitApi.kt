@@ -1,8 +1,7 @@
 package com.shermanrex.movierex.data.repository.remote.movies
 
-import com.shermanrex.movierex.data.model.MovieData
-import com.shermanrex.movierex.data.model.MovieDetailModel
-import com.shermanrex.movierex.data.model.MovieModel
+import com.shermanrex.movierex.domain.model.MovieDetailModel
+import com.shermanrex.movierex.domain.model.MovieModel
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

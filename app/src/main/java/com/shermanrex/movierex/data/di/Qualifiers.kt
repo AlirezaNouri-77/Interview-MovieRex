@@ -6,9 +6,6 @@ import javax.inject.Qualifier
 @Retention(AnnotationRetention.RUNTIME)
 annotation class MovieRetrofit
 
-@Qualifier
-@Retention(AnnotationRetention.RUNTIME)
-annotation class SearchRetrofit
 
 @Qualifier
 @Retention(AnnotationRetention.RUNTIME)

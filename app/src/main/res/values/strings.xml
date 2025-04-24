@@ -5,11 +5,12 @@
     <string name="awards">awards</string>
     <string name="actors">actors</string>
     <string name="director">director</string>
+    <string name="plot">plot</string>
     <string name="retry">retry</string>
     <string name="time_out">network connection is timeout</string>
     <string name="internet_connection">no internet connection</string>
     <string name="server_connection">there is problem in server</string>
     <string name="unknown">unknown</string>
     <string name="not_found">404 not found</string>
-    <string name="enter_name">enter a name for example the GodFather</string>
+    <string name="enter_name">enter a movie name</string>
 </resources>

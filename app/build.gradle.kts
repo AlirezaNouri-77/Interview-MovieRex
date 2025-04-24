@@ -47,8 +47,11 @@ android {
 
 ktlint {
     android = true
+    ignoreFailures = false
+    disabledRules.set(setOf("standard:final-newlinea"))
     reporters {
         reporter(ReporterType.PLAIN)
+        reporter(ReporterType.CHECKSTYLE)
     }
 }
 
@@ -74,14 +77,17 @@ dependencies {
     implementation(libs.google.hilt.navigationCompose)
     ksp(libs.google.hilt.compiler)
 
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+
+    implementation(libs.androidx.room.ktx)
+
     implementation(libs.androidx.compose.navigation)
 
     implementation(libs.coil)
     implementation(libs.coil.network)
 
-    implementation(libs.androidx.paging.compose)
-    implementation(libs.androidx.paging.runtime)
-
+    testImplementation(libs.kotlinx.coroutine.test)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

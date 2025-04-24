@@ -3,6 +3,7 @@ package com.shermanrex.movierex.presention.home
 import android.content.res.Configuration
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -20,9 +21,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.shermanrex.interview_movierex.R
-import com.shermanrex.movierex.data.model.MovieUiState
+import com.shermanrex.movierex.domain.model.MovieData
+import com.shermanrex.movierex.domain.model.MovieUiState
 import com.shermanrex.movierex.data.util.toReadableMessage
-import com.shermanrex.movierex.presention.component.ErrorPage
+import com.shermanrex.movierex.presention.component.FailurePage
 import com.shermanrex.movierex.presention.component.MovieListItem
 import com.shermanrex.movierex.presention.component.MovieTopAppBar
 import com.shermanrex.movierex.ui.theme.InterviewMovieRexTheme
@@ -30,31 +32,47 @@ import com.shermanrex.movierex.ui.theme.InterviewMovieRexTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    modifier: Modifier = Modifier,
     homeViewModel: HomeViewModel = hiltViewModel(),
-    navToDetail: (movieID: String) -> Unit,
+    navigateToDetail: (movieID: String) -> Unit,
 ) {
 
     val uiState by homeViewModel.uiState.collectAsStateWithLifecycle()
 
+    Home(
+        modifier = Modifier.fillMaxSize(),
+        uiState = uiState,
+        onRetry = { homeViewModel.handleActions(HomeScreenAction.GetMovies) },
+        navigateToDetail = { navigateToDetail(it) }
+    )
+
+}
+
+@Composable
+private fun Home(
+    modifier: Modifier = Modifier,
+    uiState: MovieUiState<List<MovieData>>,
+    onRetry: () -> Unit,
+    navigateToDetail: (movieID: String) -> Unit,
+) {
     Scaffold(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier,
         topBar = {
             MovieTopAppBar(
                 title = stringResource(R.string.Home),
             )
         },
+        contentWindowInsets = WindowInsets(bottom = 0),
     ) { scaffoldPadding ->
 
         Crossfade(
             targetState = uiState,
             modifier = Modifier
-                .fillMaxSize()
-                .padding(scaffoldPadding),
+                .fillMaxSize(),
         ) {
             Box(
                 modifier = Modifier
-                    .fillMaxSize(),
+                    .fillMaxSize()
+                    .padding(scaffoldPadding),
                 contentAlignment = Alignment.Center,
             ) {
                 when (it) {
@@ -64,22 +82,25 @@ fun HomeScreen(
                     }
 
                     is MovieUiState.Error -> {
-                        ErrorPage(
+                        FailurePage(
                             error = it.error.toReadableMessage(LocalContext.current),
                             showRetryButton = true,
                             onRetryClick = {
-                                homeViewModel.handleAction(HomeScreenAction.GetMovies)
+                                onRetry()
                             }
                         )
                     }
 
                     is MovieUiState.Success -> {
-                        LazyColumn {
+                        LazyColumn(
+                            modifier = Modifier
+                                .fillMaxSize(),
+                        ) {
                             items(it.data) {
                                 MovieListItem(
                                     item = it,
                                     onClick = {
-                                        navToDetail(it)
+                                        navigateToDetail(it)
                                     },
                                 )
                             }
@@ -91,16 +112,33 @@ fun HomeScreen(
             }
         }
     }
-
 }
 
 @Preview(showBackground = true)
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun Preview() {
+    var dummyList = buildList {
+        repeat(10) {
+            add(
+                MovieData(
+                    country = "Usa",
+                    genres = listOf("horror", "drama"),
+                    movieId = it,
+                    images = null,
+                    imdbRating = "9.0",
+                    poster = "",
+                    title = "Movie Name $it",
+                    year = "2000"
+                )
+            )
+        }
+    }
     InterviewMovieRexTheme {
-        HomeScreen(
-            navToDetail = {},
+        Home(
+            uiState = MovieUiState.Success(dummyList),
+            onRetry = {},
+            navigateToDetail = {},
         )
     }
 }

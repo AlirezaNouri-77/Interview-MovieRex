@@ -2,10 +2,10 @@ package com.shermanrex.movierex.presention.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.shermanrex.movierex.data.model.MovieDetailModel
-import com.shermanrex.movierex.data.model.MovieUiState
-import com.shermanrex.movierex.data.model.Result
-import com.shermanrex.movierex.domain.GetMovieDetailUseCase
+import com.shermanrex.movierex.domain.model.MovieDetailModel
+import com.shermanrex.movierex.domain.model.MovieUiState
+import com.shermanrex.movierex.domain.model.Result
+import com.shermanrex.movierex.domain.usecase.GetMovieDetailUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

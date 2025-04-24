@@ -21,4 +21,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "InterviewMovieRex"
 include(":app")
- 

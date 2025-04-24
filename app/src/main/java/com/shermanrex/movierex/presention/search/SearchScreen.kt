@@ -1,50 +1,44 @@
 package com.shermanrex.movierex.presention.search
 
 import android.content.res.Configuration
+import android.util.Log
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.shermanrex.interview_movierex.R
-import com.shermanrex.movierex.data.model.MovieData
-import com.shermanrex.movierex.data.model.MovieUiState
+import com.shermanrex.movierex.domain.model.MovieData
+import com.shermanrex.movierex.domain.model.MovieUiState
 import com.shermanrex.movierex.data.util.toReadableMessage
-import com.shermanrex.movierex.presention.component.ErrorPage
+import com.shermanrex.movierex.presention.component.FailurePage
+import com.shermanrex.movierex.presention.component.MessagePage
 import com.shermanrex.movierex.presention.component.MovieListItem
+import com.shermanrex.movierex.presention.component.MovieTopAppBar
+import com.shermanrex.movierex.presention.search.component.SearchTextField
 import com.shermanrex.movierex.ui.theme.InterviewMovieRexTheme
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collectLatest
@@ -59,10 +53,10 @@ fun SearchScreen(
 
     val uiState by searchViewModel.uiState.collectAsStateWithLifecycle()
 
-    SearchScreen2(
+    Search(
         modifier = modifier,
-        onTextFieldValueChange = { searchViewModel.handleAction(SearchScreenAction.GetMovie(it)) },
         uiState = uiState,
+        onSearchMovie = { searchViewModel.handleAction(SearchScreenAction.GetMovie(it)) },
         navToDetail = { navigationToDetailScreen(it) },
         onRetry = { searchViewModel.handleAction(SearchScreenAction.GetMovie(it)) },
     )
@@ -71,10 +65,10 @@ fun SearchScreen(
 
 @OptIn(FlowPreview::class)
 @Composable
-private fun SearchScreen2(
+private fun Search(
     modifier: Modifier = Modifier,
-    onTextFieldValueChange: (String) -> Unit,
     uiState: MovieUiState<List<MovieData>>,
+    onSearchMovie: (String) -> Unit,
     navToDetail: (String) -> Unit,
     onRetry: (String) -> Unit,
 ) {
@@ -83,60 +77,43 @@ private fun SearchScreen2(
         mutableStateOf("")
     }
 
+    var showCancel by rememberSaveable {
+        mutableStateOf(false)
+    }
+
     LaunchedEffect(textFieldValue) {
         snapshotFlow { textFieldValue }.debounce(400L).collectLatest {
-            onTextFieldValueChange(it)
+            if (it.isNotBlank() or it.isNotEmpty()) onSearchMovie(it)
         }
     }
 
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .statusBarsPadding(),
-    ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.primaryContainer),
-        ) {
-            TextField(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp),
-                value = textFieldValue,
-                onValueChange = { textFieldValue = it },
-                colors = TextFieldDefaults.colors(
-                    focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
-                    unfocusedContainerColor = Color.Transparent,
-                    focusedTextColor = MaterialTheme.colorScheme.onPrimary,
-                ),
-                trailingIcon = {
-                    IconButton(
-                        onClick = {
+    Scaffold(
+        modifier = modifier,
+        topBar = {
+            MovieTopAppBar(
+                actions = {
+                    SearchTextField(
+                        textFieldValue = textFieldValue,
+                        onTextFieldChange = {
+                            textFieldValue = it
+                        },
+                        onClearTextField = {
                             textFieldValue = ""
                         },
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Clear,
-                            contentDescription = "",
-                        )
-                    }
-                },
-                placeholder = {
-                    Text(
-                        text = stringResource(
-                            R.string.enter_name,
-                        ),
-                        fontSize = 14.sp,
+                        isFocus = {
+                            showCancel = it
+                        },
                     )
-                },
+                }
             )
         }
-
+    ) { scaffoldPadding ->
 
         Crossfade(
             targetState = uiState,
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(scaffoldPadding),
         ) {
             Box(
                 modifier = Modifier.fillMaxSize(),
@@ -144,46 +121,50 @@ private fun SearchScreen2(
             ) {
                 when (it) {
 
-                    MovieUiState.Loading -> {
-                        CircularProgressIndicator()
-                    }
+                    MovieUiState.Loading -> CircularProgressIndicator()
 
-                    is MovieUiState.Error -> {
-                        ErrorPage(
-                            error = it.error.toReadableMessage(LocalContext.current),
-                            showRetryButton = true,
-                            onRetryClick = { onRetry(textFieldValue) })
-                    }
+                    is MovieUiState.Error -> FailurePage(
+                        error = it.error.toReadableMessage(LocalContext.current),
+                        showRetryButton = true,
+                        onRetryClick = { onRetry(textFieldValue) }
+                    )
 
                     is MovieUiState.Success -> {
-                        LazyColumn(
-                            modifier = Modifier.fillMaxSize(),
-                        ) {
-                            items(
-                                items = it.data,
-                                key = { it.id }
+                        if (it.data.isEmpty()) {
+                            MessagePage(
+                                modifier = Modifier.fillMaxSize(),
+                                message = "Nothing Found",
+                                fontSize = 18.sp,
+                            )
+                        } else {
+                            LazyColumn(
+                                modifier = Modifier.fillMaxSize(),
                             ) {
-                                MovieListItem(
-                                    item = it,
-                                    onClick = {
-                                        navToDetail(it)
-                                    },
-                                )
+                                items(
+                                    items = it.data,
+                                    key = { it.movieId }
+                                ) {
+                                    MovieListItem(
+                                        item = it,
+                                        onClick = {
+                                            navToDetail(it)
+                                        },
+                                    )
+                                }
                             }
                         }
                     }
 
                     else -> {}
-
                 }
             }
         }
-    }
 
+    }
 }
 
-@Preview(showBackground = true)
-@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(showBackground = true, showSystemUi = true)
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES, showSystemUi = true)
 @Composable
 private fun Preview() {
     var dummyList = buildList {
@@ -192,7 +173,7 @@ private fun Preview() {
                 MovieData(
                     country = "Somalia",
                     genres = listOf("horror", "drama"),
-                    id = it,
+                    movieId = it,
                     images = null,
                     imdbRating = "9.0",
                     poster = "",
@@ -203,9 +184,9 @@ private fun Preview() {
         }
     }
     InterviewMovieRexTheme {
-        SearchScreen2(
-            onTextFieldValueChange = {},
+        Search(
             uiState = MovieUiState.Success(dummyList),
+            onSearchMovie = {},
             navToDetail = {},
             onRetry = {},
         )

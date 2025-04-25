@@ -15,3 +15,7 @@ fun NetworkError.toReadableMessage(context: Context): String {
         NetworkError.NOT_FOUND_404 -> context.getString(R.string.not_found)
     }
 }
+
+fun String.toListOfString(): List<String> {
+    return this.trim().split(",").map { it.trim() }.filter { it.isNotEmpty() }.toList()
+}

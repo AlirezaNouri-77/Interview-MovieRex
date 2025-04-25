@@ -13,7 +13,9 @@ inline fun <reified T> safeCall(action: () -> Response<T>): Result<T, NetworkErr
     var response = action()
     if (response.isSuccessful) {
       responseMapper(response)
-    } else Result.Failure<NetworkError>(NetworkError.RESPONSE_NOT_SUCCESSFUL)
+    } else {
+      Result.Failure<NetworkError>(NetworkError.RESPONSE_NOT_SUCCESSFUL)
+    }
   } catch (e: SocketTimeoutException) {
     e.printStackTrace()
     Result.Failure<NetworkError>(NetworkError.TIME_OUT)

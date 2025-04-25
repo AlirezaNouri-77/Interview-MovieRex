@@ -1,6 +1,6 @@
 package com.shermanrex.movierex.data.di
 
-import com.shermanrex.movierex.data.repository.remote.movies.RetrofitApi
+import com.shermanrex.movierex.domain.repository.RetrofitApi
 import com.shermanrex.movierex.data.util.Constant
 import dagger.Module
 import dagger.Provides

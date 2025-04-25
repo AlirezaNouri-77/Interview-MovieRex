@@ -26,6 +26,7 @@ import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -38,12 +39,11 @@ fun SearchTextField(
     textFieldValue: String,
     onTextFieldChange: (String) -> Unit,
     onClearTextField: () -> Unit,
-    isFocus: (Boolean) -> Unit,
 ) {
 
     var focusManager = LocalFocusManager.current
 
-    var isFocus by rememberSaveable {
+    var isTextFieldFocused by rememberSaveable {
         mutableStateOf(false)
     }
 
@@ -52,7 +52,7 @@ fun SearchTextField(
             .fillMaxWidth()
             .padding(horizontal = 10.dp, vertical = 5.dp)
             .onFocusChanged {
-                isFocus = it.isFocused
+                isTextFieldFocused = it.isFocused
             },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center,
@@ -79,17 +79,16 @@ fun SearchTextField(
             },
             placeholder = {
                 Text(
-                    text = stringResource(
-                        R.string.enter_name,
-                    ),
-                    fontSize = 13.sp,
+                    text = stringResource(R.string.enter_name),
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.SemiBold,
                 )
             },
             colors = OutlinedTextFieldDefaults.colors(
                 focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
                 unfocusedBorderColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.2f),
                 focusedBorderColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.8f),
-                unfocusedContainerColor = Color.Transparent,
+                unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.8f),
                 focusedTextColor = MaterialTheme.colorScheme.onPrimary,
             ),
             shape = RoundedCornerShape(15.dp),
@@ -97,7 +96,7 @@ fun SearchTextField(
         )
 
         AnimatedVisibility(
-            visible = isFocus,
+            visible = isTextFieldFocused,
         ) {
             TextButton(
                 onClick = {
@@ -106,6 +105,7 @@ fun SearchTextField(
             ) {
                 Text(
                     text = "Cancel",
+                    fontWeight = FontWeight.Bold,
                 )
             }
         }
@@ -122,7 +122,6 @@ private fun Preview() {
             textFieldValue = "",
             onTextFieldChange = {},
             onClearTextField = {},
-            isFocus = { true },
         )
     }
 }

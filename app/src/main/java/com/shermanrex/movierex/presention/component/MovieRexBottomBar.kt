@@ -20,7 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.shermanrex.interview_movierex.R
-import com.shermanrex.movierex.domain.model.NavigationBarItemModel
+import com.shermanrex.movierex.presention.navigationGraph.NavigationBarItemModel
 import com.shermanrex.movierex.presention.navigationGraph.Home
 import com.shermanrex.movierex.presention.navigationGraph.NavigationRoutes
 import com.shermanrex.movierex.presention.navigationGraph.Search
@@ -29,12 +29,9 @@ import com.shermanrex.movierex.ui.theme.InterviewMovieRexTheme
 @Composable
 fun MovieRexBottomBar(
     modifier: Modifier = Modifier,
-    onClick: (NavigationRoutes) -> Unit,
+    onClick: (NavigationRoutes, Int) -> Unit,
+    currentNavigationIndex: Int,
 ) {
-
-    var currentNavigationIndex by rememberSaveable {
-        mutableIntStateOf(0)
-    }
 
     val navigationItems = arrayOf(
         NavigationBarItemModel(
@@ -57,8 +54,7 @@ fun MovieRexBottomBar(
         navigationItems.onEachIndexed { index, item ->
             NavigationBarItem(
                 onClick = {
-                    onClick(item.route)
-                    currentNavigationIndex = index
+                    onClick(item.route, index)
                 },
                 selected = currentNavigationIndex == index,
                 label = {
@@ -87,7 +83,8 @@ fun MovieRexBottomBar(
 private fun Preview() {
     InterviewMovieRexTheme {
         MovieRexBottomBar(
-            onClick = {},
+            currentNavigationIndex = 0,
+            onClick = { _, _ -> },
         )
     }
 }

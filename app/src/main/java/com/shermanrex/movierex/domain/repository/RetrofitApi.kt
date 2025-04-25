@@ -1,4 +1,4 @@
-package com.shermanrex.movierex.data.repository.remote.movies
+package com.shermanrex.movierex.domain.repository
 
 import com.shermanrex.movierex.domain.model.MovieDetailModel
 import com.shermanrex.movierex.domain.model.MovieModel
@@ -13,13 +13,9 @@ interface RetrofitApi {
     suspend fun getMovies(): Response<MovieModel>
 
     @GET("movies/{id}")
-    suspend fun getMovieDetail(
-        @Path("id") movieID: String,
-    ): Response<MovieDetailModel>
+    suspend fun getMovieDetail(@Path("id") movieID: String): Response<MovieDetailModel>
 
     @GET("movies/")
-    suspend fun getMovieByName(
-        @Query("q") name: String,
-    ): Response<MovieModel>
+    suspend fun getMovieByName(@Query("q") name: String): Response<MovieModel>
 
 }

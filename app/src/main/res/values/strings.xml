@@ -2,15 +2,15 @@
     <string name="app_name">MovieRex</string>
     <string name="Home">Home</string>
     <string name="Search">Search</string>
-    <string name="awards">awards</string>
-    <string name="actors">actors</string>
-    <string name="director">director</string>
-    <string name="plot">plot</string>
-    <string name="retry">retry</string>
-    <string name="time_out">network connection is timeout</string>
-    <string name="internet_connection">no internet connection</string>
-    <string name="server_connection">there is problem in server</string>
-    <string name="unknown">unknown</string>
+    <string name="awards">Awards</string>
+    <string name="actors">Actors</string>
+    <string name="director">Director</string>
+    <string name="plot">Plot</string>
+    <string name="retry">Retry</string>
+    <string name="time_out">The network connection is timeout</string>
+    <string name="internet_connection">No internet connection</string>
+    <string name="server_connection">There is problem in server</string>
+    <string name="unknown">Unknown</string>
     <string name="not_found">404 not found</string>
-    <string name="enter_name">enter a movie name</string>
+    <string name="enter_name">Enter a movie name</string>
 </resources>

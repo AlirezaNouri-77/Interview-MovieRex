@@ -1,4 +1,4 @@
-package com.shermanrex.movierex.data.repository.remote.movies
+package com.shermanrex.movierex.data.repository.remote
 
 import com.shermanrex.movierex.data.di.MovieRetrofit
 import com.shermanrex.movierex.data.util.safeCall
@@ -7,12 +7,12 @@ import com.shermanrex.movierex.domain.model.MovieModel
 import com.shermanrex.movierex.domain.model.NetworkError
 import com.shermanrex.movierex.domain.model.Result
 import com.shermanrex.movierex.domain.repository.RemoteMovieRepositoryImpl
+import com.shermanrex.movierex.domain.repository.RetrofitApi
 import javax.inject.Inject
 
 class RemoteMovieRepository @Inject constructor(
     @MovieRetrofit private val retrofit: RetrofitApi,
 ) : RemoteMovieRepositoryImpl {
-
     override suspend fun getMovie(): Result<MovieModel, NetworkError> {
         return safeCall {
             retrofit.getMovies()
@@ -30,5 +30,4 @@ class RemoteMovieRepository @Inject constructor(
             retrofit.getMovieByName(name)
         }
     }
-
 }

@@ -1,7 +1,6 @@
-package com.shermanrex.movierex.domain.model
+package com.shermanrex.movierex.presention.navigationGraph
 
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.shermanrex.movierex.presention.navigationGraph.NavigationRoutes
 
 data class NavigationBarItemModel(
     val name: String,

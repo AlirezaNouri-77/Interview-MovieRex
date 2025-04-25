@@ -8,7 +8,6 @@ import com.google.gson.annotations.SerializedName
 @Stable
 data class MovieModel(
     @SerializedName("data") val movie: List<MovieData>,
-    @SerializedName("metadata") val metadata: Metadata?,
 )
 
 @Keep
@@ -22,14 +21,5 @@ data class MovieData(
     @SerializedName("title") val title: String,
     @SerializedName("year") val year: String,
 )
-
-@Keep
-data class Metadata(
-    @SerializedName("current_page") val currentPage: String,
-    @SerializedName("page_count") val pageCount: Int,
-    @SerializedName("per_page") val perPage: Int,
-    @SerializedName("total_count") val totalCount: Int
-)
-
 
 

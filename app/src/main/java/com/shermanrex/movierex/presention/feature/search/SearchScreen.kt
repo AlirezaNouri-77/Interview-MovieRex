@@ -2,6 +2,7 @@ package com.shermanrex.movierex.presention.feature.search
 
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -68,10 +69,6 @@ private fun Search(
         mutableStateOf("")
     }
 
-    var showCancel by rememberSaveable {
-        mutableStateOf(false)
-    }
-
     LaunchedEffect(textFieldValue) {
         snapshotFlow { textFieldValue }.debounce(400L).collectLatest {
             if (it.isNotBlank() or it.isNotEmpty()) onSearchMovie(it)
@@ -91,13 +88,11 @@ private fun Search(
                         onClearTextField = {
                             textFieldValue = ""
                         },
-                        isFocus = {
-                            showCancel = it
-                        },
                     )
                 }
             )
-        }
+        },
+        contentWindowInsets = WindowInsets(bottom = 0)
     ) { scaffoldPadding ->
 
         Crossfade(

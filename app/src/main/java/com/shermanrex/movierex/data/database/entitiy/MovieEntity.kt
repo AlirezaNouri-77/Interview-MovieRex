@@ -13,4 +13,5 @@ data class MovieEntity(
     @ColumnInfo(name = "movie_id") val movieID: String,
     @ColumnInfo(name = "country") val country: String,
     @ColumnInfo(name = "year") val year: String,
+    @ColumnInfo(name = "genres") val genres: String,
 )

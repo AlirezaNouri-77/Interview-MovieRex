@@ -11,7 +11,10 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -34,6 +37,10 @@ fun MainScreen(modifier: Modifier = Modifier) {
             ?: Home) == false
     }
 
+    var currentNavigationBarIndex by remember {
+        mutableIntStateOf(0)
+    }
+
     Scaffold(
         modifier = modifier.fillMaxSize(),
         bottomBar = {
@@ -43,8 +50,9 @@ fun MainScreen(modifier: Modifier = Modifier) {
                 enter = slideInVertically { it + it / 2 }
             ) {
                 MovieRexBottomBar(
-                    onClick = {
-                        navHostController.navigate(it) {
+                    onClick = { route, index ->
+                        currentNavigationBarIndex = index
+                        navHostController.navigate(route) {
                             popUpTo(currentDestinationId) {
                                 inclusive = true
                                 saveState = true
@@ -52,7 +60,8 @@ fun MainScreen(modifier: Modifier = Modifier) {
                             restoreState = true
                             launchSingleTop = true
                         }
-                    }
+                    },
+                    currentNavigationIndex = currentNavigationBarIndex,
                 )
             }
         },

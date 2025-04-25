@@ -26,6 +26,7 @@ import org.junit.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class HomeViewModelTest {
+
     lateinit var homeViewModel: HomeViewModel
     lateinit var getMoviesUseCase: GetMoviesUseCase
     lateinit var remoteMovieRepository: RemoteMovieRepositoryFake

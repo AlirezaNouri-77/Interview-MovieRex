@@ -8,7 +8,6 @@ import javax.inject.Inject
 class LocalMovieRepository @Inject constructor(
     private val movieDao: MovieDao,
 ) : LocalMovieRepositoryImpl {
-
     override suspend fun getAll(): List<MovieEntity> = movieDao.getAll()
 
     override suspend fun clearAll() = movieDao.clearDb()
@@ -16,6 +15,5 @@ class LocalMovieRepository @Inject constructor(
     override suspend fun insertData(list: List<MovieEntity>) = movieDao.insertAll(list)
 
     override suspend fun clearAndInsert(list: List<MovieEntity>) = movieDao.clearAndInsert(list)
-
 }
 

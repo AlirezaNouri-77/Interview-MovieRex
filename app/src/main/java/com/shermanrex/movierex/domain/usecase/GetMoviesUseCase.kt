@@ -39,7 +39,7 @@ class GetMoviesUseCase @Inject constructor(
             if (dataBaseData.isEmpty()) {
                 emit(Result.Failure(NetworkError.INTERNET_CONNECTION))
             } else {
-                emit(Result.Success(MovieModel(dataBaseData.map { it.toMovieData() }, null)))
+                emit(Result.Success(MovieModel(dataBaseData.map { it.toMovieData() })))
             }
         }
     }.flowOn(dispatcherIO)

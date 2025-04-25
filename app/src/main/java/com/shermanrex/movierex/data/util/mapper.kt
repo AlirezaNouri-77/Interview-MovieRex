@@ -11,18 +11,19 @@ fun MovieData.toMovieEntity(): MovieEntity {
         movieID = this.movieId.toString(),
         country = this.country,
         year = this.year,
+        genres = this.genres?.joinToString() ?: "",
     )
 }
 
 fun MovieEntity.toMovieData(): MovieData {
     return MovieData(
         country = this.country,
-        genres = null,
         movieId = this.movieID.toInt(),
         images = null,
         imdbRating = this.imdbRating,
         poster = this.poster,
         title = this.movieName,
         year = this.year,
+        genres = this.genres.toListOfString(),
     )
 }

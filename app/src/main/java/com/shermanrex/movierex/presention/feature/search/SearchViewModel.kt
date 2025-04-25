@@ -13,28 +13,30 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SearchViewModel
-    @Inject
-    constructor(
-        private val getMovieByNameUseCase: GetMovieByNameUseCase,
-    ) : ViewModel() {
-        private var _uiState: MutableStateFlow<MovieUiState<List<MovieData>>> = MutableStateFlow(MovieUiState.Initial)
-        val uiState = _uiState.asStateFlow()
+class SearchViewModel @Inject constructor(
+    private val getMovieByNameUseCase: GetMovieByNameUseCase,
+) : ViewModel() {
 
-        fun handleAction(action: SearchScreenAction) {
-            when (action) {
-                is SearchScreenAction.GetMovie -> getMovie(action.name)
-            }
+    private var _uiState: MutableStateFlow<MovieUiState<List<MovieData>>> = MutableStateFlow(MovieUiState.Initial)
+    val uiState = _uiState.asStateFlow()
+
+    fun handleAction(action: SearchScreenAction) {
+        when (action) {
+            is SearchScreenAction.GetMovie -> getMovie(action.name)
         }
+    }
 
-        private fun getMovie(name: String) =
-            viewModelScope.launch {
-                _uiState.value = MovieUiState.Loading
-                getMovieByNameUseCase.invoke(name).collect {
-                    when (it) {
-                        is Result.Failure -> _uiState.value = MovieUiState.Error(it.error)
-                        is Result.Success -> _uiState.value = MovieUiState.Success(it.data.movie)
-                    }
+    private fun getMovie(name: String) {
+        viewModelScope.launch {
+            _uiState.value = MovieUiState.Loading
+            getMovieByNameUseCase.invoke(name).collect {
+                when (it) {
+                    is Result.Failure -> _uiState.value = MovieUiState.Error(it.error)
+                    is Result.Success -> _uiState.value = MovieUiState.Success(it.data.movie)
                 }
             }
+        }
     }
+
+
+}

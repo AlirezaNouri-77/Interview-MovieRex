@@ -11,7 +11,7 @@ data class MovieDetailModel(
     @SerializedName("director") val director: String,
     @SerializedName("genres") val genres: List<String>,
     @SerializedName("id") val id: Int,
-    @SerializedName("images") val images: List<String>,
+    @SerializedName("images") val images: List<String>?,
     @SerializedName("imdb_id") val imdbId: String,
     @SerializedName("imdb_rating") val imdbRating: String,
     @SerializedName("imdb_votes") val imdbVotes: String,

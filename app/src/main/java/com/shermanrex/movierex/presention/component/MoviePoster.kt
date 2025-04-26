@@ -9,9 +9,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalInspectionMode
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import com.shermanrex.interview_movierex.R
 
 @Composable
 fun MoviePoster(
@@ -31,6 +33,9 @@ fun MoviePoster(
             modifier = modifier
                 .clip(RoundedCornerShape(cornerRadius)),
             contentScale = ContentScale.FillWidth,
+            clipToBounds = true,
+            placeholder = painterResource(R.drawable.image_placeholder),
+            error = painterResource(R.drawable.image_placeholder),
             contentDescription = "",
         )
     }

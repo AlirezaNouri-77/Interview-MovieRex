@@ -25,7 +25,9 @@ fun NavigationGraph(
         composable<Home> {
             HomeScreen(
                 navigateToDetail = { movieID ->
-                    navHostController.navigate(Detail(movieID))
+                    navHostController.navigate(Detail(movieID)){
+                        launchSingleTop = true
+                    }
                 },
             )
         }
@@ -33,7 +35,9 @@ fun NavigationGraph(
         composable<Search> {
             SearchScreen(
                 navigationToDetailScreen = { movieID ->
-                    navHostController.navigate(Detail(movieID))
+                    navHostController.navigate(Detail(movieID)){
+                        this.launchSingleTop = true
+                    }
                 },
             )
         }

@@ -1,6 +1,7 @@
 package com.shermanrex.movierex.presention.component
 
 import android.content.res.Configuration
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -19,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -65,20 +67,28 @@ fun MovieListItem(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                Text(text = item.title)
+                Text(
+                    modifier = Modifier.basicMarquee(),
+                    text = item.title,
+                    fontWeight = FontWeight.Medium,
+                    maxLines = 1
+                )
                 item.genres?.let {
                     Text(
-                        text = it.reduce { acc, string -> "$acc, $string" },
-                        fontSize = 13.sp,
+                        text = it.joinToString(),
+                        fontSize = 14.sp,
                     )
                 }
+                Text(
+                    text = "${item.country} ${item.year}",
+                    fontSize = 13.sp,
+                )
             }
             Spacer(modifier.width(5.dp))
             MoviePoster(
-                modifier =
-                    Modifier
-                        .size(90.dp)
-                        .weight(0.2f),
+                modifier = Modifier
+                    .size(90.dp)
+                    .weight(0.2f),
                 url = item.poster,
             )
         }

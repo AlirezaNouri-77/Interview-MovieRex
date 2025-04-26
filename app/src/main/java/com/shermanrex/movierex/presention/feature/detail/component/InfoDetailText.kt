@@ -4,8 +4,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
@@ -27,13 +29,19 @@ fun InfoDetailText(
             )
         ) {
             append(title)
-            append("\n")
             withStyle(
-                style = SpanStyle(
-                    fontSize = 14.sp,
-                )
+                style = ParagraphStyle(
+                    textAlign = TextAlign.Justify,
+                ),
             ) {
-                append(description)
+                withStyle(
+                    SpanStyle(
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Medium,
+                    )
+                ) {
+                    append(description)
+                }
             }
         }
     }
@@ -45,7 +53,7 @@ fun InfoDetailText(
 }
 
 
-@Preview()
+@Preview(showBackground = true)
 @Composable
 private fun PreviewInfoDetailText() {
     InterviewMovieRexTheme {

@@ -32,6 +32,7 @@ class GetMoviesUseCase @Inject constructor(
                 val movieData = apiCallResponse.data.movie.map { it.toMovieEntity() }
                 localMovieRepository.clearAndInsert(movieData)
             }
+
             emit(apiCallResponse)
         } else {
             val dataBaseData = localMovieRepository.getAll()

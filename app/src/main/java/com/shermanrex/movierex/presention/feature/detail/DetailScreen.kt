@@ -160,6 +160,9 @@ private fun Detail(
             }
         }
         Text(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp),
             text = movieName,
             fontWeight = FontWeight.Bold,
             fontSize = 22.sp,

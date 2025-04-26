@@ -8,10 +8,8 @@ import com.shermanrex.movierex.domain.usecase.GetMoviesUseCase
 import com.shermanrex.movierex.presention.feature.home.HomeViewModel
 import com.shermanrex.movierex.repository.LocalMovieRepositoryFake
 import com.shermanrex.movierex.repository.RemoteMovieRepositoryFake
-import com.shermanrex.movierex.util.MovieEntityDummy
+import com.shermanrex.movierex.util.DummyData
 import com.shermanrex.movierex.util.NetworkConnectivityFake
-import com.shermanrex.movierex.util.movieDataDummyList
-import junit.framework.TestCase
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -29,17 +27,14 @@ class HomeViewModelTest {
 
     lateinit var homeViewModel: HomeViewModel
     lateinit var getMoviesUseCase: GetMoviesUseCase
-    lateinit var remoteMovieRepository: RemoteMovieRepositoryFake
-    lateinit var networkConnectivity: NetworkConnectivityFake
-    lateinit var localMovieRepositoryFake: LocalMovieRepositoryFake
+    var remoteMovieRepository = RemoteMovieRepositoryFake()
+    var networkConnectivity = NetworkConnectivityFake()
+    var localMovieRepositoryFake = LocalMovieRepositoryFake()
 
     val dispatcher = UnconfinedTestDispatcher()
 
     @Before
     fun setup() {
-        remoteMovieRepository = RemoteMovieRepositoryFake()
-        networkConnectivity = NetworkConnectivityFake()
-        localMovieRepositoryFake = LocalMovieRepositoryFake()
 
         Dispatchers.setMain(dispatcher)
 
@@ -57,20 +52,20 @@ class HomeViewModelTest {
     fun `get data from network`() = runTest {
 
         networkConnectivity.setConnectivityState(true)
-        TestCase.assertEquals(true, networkConnectivity.networkState.first())
+        assertEquals(true, networkConnectivity.networkState.first())
 
         val initialResult = homeViewModel.uiState.value
         // initial value should be Loading
-        TestCase.assertEquals(true, initialResult is MovieUiState.Loading)
+        assertEquals(true, initialResult is MovieUiState.Loading)
 
-        remoteMovieRepository.setData(Result.Success(MovieModel(movieDataDummyList, null)))
+        remoteMovieRepository.setMovieData(Result.Success(MovieModel(DummyData.movieDataDummyList)))
 
         backgroundScope.launch(dispatcher) { homeViewModel.uiState.collect() }
 
         val result = homeViewModel.uiState.value
 
         if (result is MovieUiState.Success) {
-            TestCase.assertEquals(10, result.data.size)
+            assertEquals(10, result.data.size)
         }
 
     }
@@ -79,20 +74,20 @@ class HomeViewModelTest {
     fun `get data from database`() = runTest {
 
         networkConnectivity.setConnectivityState(false)
-        TestCase.assertEquals(false, networkConnectivity.networkState.first())
+        assertEquals(false, networkConnectivity.networkState.first())
 
         val initialResult = homeViewModel.uiState.value
         // initial value should be Loading
-        TestCase.assertEquals(true, initialResult is MovieUiState.Loading)
+        assertEquals(true, initialResult is MovieUiState.Loading)
 
-        localMovieRepositoryFake.insertData(list = MovieEntityDummy)
+        localMovieRepositoryFake.insertData(list = DummyData.MovieEntityDummy)
 
         backgroundScope.launch(dispatcher) { homeViewModel.uiState.collect() }
 
         val result = homeViewModel.uiState.value
 
         if (result is MovieUiState.Success) {
-            TestCase.assertEquals(5, result.data.size)
+            assertEquals(5, result.data.size)
         }
 
     }
@@ -107,7 +102,7 @@ class HomeViewModelTest {
         // initial value should be Loading
         assertEquals(true, initialResult is MovieUiState.Loading)
 
-        remoteMovieRepository.setData(Result.Failure(NetworkError.INTERNET_CONNECTION))
+        remoteMovieRepository.setMovieData(Result.Failure(NetworkError.INTERNET_CONNECTION))
 
         backgroundScope.launch(dispatcher) { homeViewModel.uiState.collect() }
 

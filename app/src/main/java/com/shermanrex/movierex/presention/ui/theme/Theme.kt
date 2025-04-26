@@ -1,4 +1,4 @@
-package com.shermanrex.movierex.ui.theme
+package com.shermanrex.movierex.presention.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

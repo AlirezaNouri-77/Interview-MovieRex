@@ -7,13 +7,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
-import com.shermanrex.movierex.ui.theme.InterviewMovieRexTheme
+import com.shermanrex.movierex.presention.ui.theme.InterviewMovieRexTheme
 
 @Composable
 fun InfoDetailText(

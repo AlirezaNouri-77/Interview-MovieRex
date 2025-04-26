@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.shermanrex.interview_movierex.R
 import com.shermanrex.movierex.domain.model.MovieData
-import com.shermanrex.movierex.ui.theme.InterviewMovieRexTheme
+import com.shermanrex.movierex.presention.ui.theme.InterviewMovieRexTheme
 
 @Composable
 fun MovieListItem(

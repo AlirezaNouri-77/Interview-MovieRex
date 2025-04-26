@@ -11,10 +11,6 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -24,7 +20,7 @@ import com.shermanrex.movierex.presention.navigationGraph.NavigationBarItemModel
 import com.shermanrex.movierex.presention.navigationGraph.Home
 import com.shermanrex.movierex.presention.navigationGraph.NavigationRoutes
 import com.shermanrex.movierex.presention.navigationGraph.Search
-import com.shermanrex.movierex.ui.theme.InterviewMovieRexTheme
+import com.shermanrex.movierex.presention.ui.theme.InterviewMovieRexTheme
 
 @Composable
 fun MovieRexBottomBar(

@@ -1,4 +1,4 @@
-package com.shermanrex.movierex.presention
+package com.shermanrex.movierex.presention.feature
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically

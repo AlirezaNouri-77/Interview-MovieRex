@@ -26,7 +26,7 @@ import com.shermanrex.movierex.domain.model.MovieUiState
 import com.shermanrex.movierex.presention.component.FailurePage
 import com.shermanrex.movierex.presention.component.MovieListItem
 import com.shermanrex.movierex.presention.component.MovieTopAppBar
-import com.shermanrex.movierex.ui.theme.InterviewMovieRexTheme
+import com.shermanrex.movierex.presention.ui.theme.InterviewMovieRexTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

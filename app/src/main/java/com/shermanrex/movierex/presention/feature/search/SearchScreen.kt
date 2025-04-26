@@ -1,6 +1,5 @@
 package com.shermanrex.movierex.presention.feature.search
 
-import android.util.Log
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
@@ -32,7 +31,7 @@ import com.shermanrex.movierex.presention.component.MessagePage
 import com.shermanrex.movierex.presention.component.MovieListItem
 import com.shermanrex.movierex.presention.component.MovieTopAppBar
 import com.shermanrex.movierex.presention.feature.search.component.SearchTextField
-import com.shermanrex.movierex.ui.theme.InterviewMovieRexTheme
+import com.shermanrex.movierex.presention.ui.theme.InterviewMovieRexTheme
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce

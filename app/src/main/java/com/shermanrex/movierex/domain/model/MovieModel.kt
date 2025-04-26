@@ -16,7 +16,7 @@ data class MovieData(
     @SerializedName("genres") val genres: List<String>?,
     @SerializedName("id") val movieId: Int,
     @SerializedName("images") val images: List<String>?,
-    @SerializedName("imdb_rating") val imdbRating: String,
+    @SerializedName("imdb_rating") val imdbRating: String?,
     @SerializedName("poster") val poster: String,
     @SerializedName("title") val title: String,
     @SerializedName("year") val year: String,

@@ -37,7 +37,3 @@ class DetailViewModel @Inject constructor(
     }
 
 }
-
-sealed interface DetailScreenAction {
-    data class GetMovieDetail(var movieID: String) : DetailScreenAction
-}

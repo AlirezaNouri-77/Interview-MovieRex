@@ -5,7 +5,7 @@ import com.shermanrex.movierex.domain.model.MovieData
 
 fun MovieData.toMovieEntity(): MovieEntity {
     return MovieEntity(
-        imdbRating = this.imdbRating,
+        imdbRating = this.imdbRating ?: "",
         movieName = this.title,
         poster = this.poster,
         movieID = this.movieId.toString(),

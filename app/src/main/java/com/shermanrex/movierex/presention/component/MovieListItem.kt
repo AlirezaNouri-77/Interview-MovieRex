@@ -59,7 +59,7 @@ fun MovieListItem(
                     tint = colorResource(R.color.yellow),
                     contentDescription = "",
                 )
-                Text(text = item.imdbRating)
+                Text(text = item.imdbRating ?: "")
             }
             Spacer(modifier.width(5.dp))
             Column(

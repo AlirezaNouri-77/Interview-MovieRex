@@ -43,7 +43,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getMovies() {
         viewModelScope.launch {
-            getMoviesUseCase.invoke().collect {
+            getMoviesUseCase().collect {
                 when (it) {
                     is Result.Failure -> _uiState.value = MovieUiState.Error(it.error)
                     is Result.Success -> _uiState.value = MovieUiState.Success(it.data.movie)

@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -125,6 +126,7 @@ private fun Search(
                         } else {
                             LazyColumn(
                                 modifier = Modifier.fillMaxSize(),
+                                state = rememberLazyListState(),
                             ) {
                                 items(
                                     items = it.data,

@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavDestination.Companion.hasRoute
@@ -36,7 +37,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
             ?: Home) == false
     }
 
-    var currentNavigationBarIndex by remember {
+    var currentNavigationBarIndex by rememberSaveable {
         mutableIntStateOf(0)
     }
 
